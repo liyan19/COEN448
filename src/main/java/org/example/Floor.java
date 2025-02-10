@@ -27,4 +27,8 @@ public class Floor {
     public int getSize() {
         return size;
     }
+
+    public int[][] getGrid() {
+        return grid;
+    }
 }
