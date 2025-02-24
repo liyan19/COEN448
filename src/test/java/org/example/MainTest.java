@@ -41,6 +41,18 @@ class MainTest {
     }
 
     @Test
+    void testInitializationExtraNumber() {
+        String output = runMainWithInput("I 5 6\nQ\n");
+        assertTrue(output.contains("Please Initialize first"));
+    }
+
+    @Test
+    void testInitializationExtraCharacter() {
+        String output = runMainWithInput("I 5a\nQ\n");
+        assertTrue(output.contains("Please enter a valid number"));
+    }
+
+    @Test
     void testCommandBeforeInitialization() {
         String output = runMainWithInput("D\nQ\n");
         assertTrue(output.contains("Please Initialize first"));
@@ -92,5 +104,10 @@ class MainTest {
     void testInvalidCommand() {
         String output = runMainWithInput("I 5\nX\nQ\n");
         assertTrue(output.contains("Invalid Command"));
+    }
+    @Test
+    void testQuitCommand() {
+        String output = runMainWithInput("I 5\nQ\n");
+        assertTrue(output.contains("exit"));
     }
 }

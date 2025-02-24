@@ -10,9 +10,6 @@ public class Main {
         Robot robot = null;
         boolean initialized = false;
         String history = "";
-
-
-
         while (true) {
             System.out.print(">Enter command: ");
             String input = scanner.nextLine().trim();
