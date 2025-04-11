@@ -110,4 +110,6 @@ class MainTest {
         String output = runMainWithInput("I 5\nQ\n");
         assertTrue(output.contains("exit"));
     }
+
+
 }

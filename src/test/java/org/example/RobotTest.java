@@ -147,4 +147,43 @@ public class RobotTest {
         assertEquals(startX, robot.getX());
         assertEquals(floor.getSize() - 1, robot.getY());
     }
+
+    //Regression Testing
+    @Test
+    void testSingleStep(){
+        robot.penDown();
+        robot.moveForward(1);
+        assertEquals(1, floor.getGrid()[0][0]);
+        assertEquals(1, floor.getGrid()[0][1]);
+    }
+    @Test
+    void testMoveForwardDataFlow(){
+        //Move out of Bound
+        robot.moveForward(10);
+        assertEquals(0, robot.getX());
+        assertEquals(9, robot.getY());
+        //Reset robot
+        robot=new Robot(floor);
+        //Move to (0,2)
+        robot.moveForward(2);
+        assertEquals(0, robot.getX());
+        assertEquals(2, robot.getY());
+        assertEquals(0, floor.getGrid()[0][2]);
+        //Put pen down and move to (0,5)
+        robot.penDown();
+        robot.moveForward(3);
+        assertEquals(0, floor.getGrid()[0][1]);
+        assertEquals(1, floor.getGrid()[0][2]);
+        assertEquals(1, floor.getGrid()[0][3]);
+        assertEquals(1, floor.getGrid()[0][4]);
+        assertEquals(1, floor.getGrid()[0][5]);
+        //Turn east and move to (2,5)
+        robot.rotate(Turn.RIGHT);
+        robot.moveForward(2);
+        assertEquals(2,robot.getX());
+        assertEquals(5,robot.getY());
+        assertEquals(1, floor.getGrid()[0][5]);
+        assertEquals(1, floor.getGrid()[1][5]);
+        assertEquals(1, floor.getGrid()[2][5]);
+    }
 }

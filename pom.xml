@@ -12,6 +12,11 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.token>sqp_b03cbce2fcfe56ccecfb2873fa541e88e56dab41</sonar.token>
+        <sonar.projectKey>sqa_4c7b7d3713aadf1c69e3ae59ada03199967f4244</sonar.projectKey>
+        <sonar.projectName>COEN448</sonar.projectName>
     </properties>
 
     <dependencies>
@@ -30,8 +35,15 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>5.0.0.4389</version>
+            </plugin>
+
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -51,6 +63,38 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.19.1</version>
+
+                <!--attach execution to maven's test phase-->
+                <executions>
+                    <execution>
+                        <id>pit-report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>mutationCoverage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+
+                <dependencies>
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-junit5-plugin</artifactId>
+                        <version>1.2.1</version>
+                    </dependency>
+                </dependencies>
+
+
+
+
+            </plugin>
+
+
+
         </plugins>
     </build>
 
